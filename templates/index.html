@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Transcript Fetcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Video Transcript Fetcher</h1>
+        <form method="POST">
+            <label for="video_url">Enter YouTube Video ID or URL:</label>
+            <input type="text" id="video_url" name="video_url" required>
+            <button type="submit">Get Transcript</button>
+        </form>
+
+        {% if error %}
+            <div class="error-message">
+                <h2>Error:</h2>
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        {% if transcript %}
+            <h2>Transcript:</h2>
+            <div class="transcript-output">
+                <pre>{{ transcript }}</pre>
+            </div>
+            {% if filename_on_server %}
+                <p class="success-message">Transcript was also saved on the server as: {{ filename_on_server }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
